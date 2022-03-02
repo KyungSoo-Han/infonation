@@ -1,4 +1,4 @@
-package kr.infonation.devspring.base;
+package kr.infonation.base;
 
 
 import lombok.Getter;

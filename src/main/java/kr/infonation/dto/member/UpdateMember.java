@@ -1,20 +1,16 @@
-package kr.infonation.devspring.dto.member;
+package kr.infonation.dto.member;
 
-import kr.infonation.devspring.domain.member.Address;
-import kr.infonation.devspring.domain.member.Member;
-import kr.infonation.devspring.domain.member.Role;
+import kr.infonation.domain.member.Address;
+import kr.infonation.domain.member.Member;
+import kr.infonation.domain.member.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Embedded;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 
-public class CreateMember {
-
+public class UpdateMember {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
@@ -77,5 +73,4 @@ public class CreateMember {
             this.modifiedDate = member.getModifiedDate();
         }
     }
-
 }

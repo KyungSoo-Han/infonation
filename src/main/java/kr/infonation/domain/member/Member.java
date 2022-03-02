@@ -1,5 +1,5 @@
-package kr.infonation.devspring.domain.member;
-import kr.infonation.devspring.base.BaseEntity;
+package kr.infonation.domain.member;
+import kr.infonation.base.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

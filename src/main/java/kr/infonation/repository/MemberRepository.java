@@ -1,6 +1,6 @@
-package kr.infonation.devspring.repository;
+package kr.infonation.repository;
 
-import kr.infonation.devspring.domain.member.Member;
+import kr.infonation.domain.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

@@ -1,4 +1,4 @@
-package kr.infonation.devspring;
+package kr.infonation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,10 +1,10 @@
-package kr.infonation.devspring.service;
+package kr.infonation.service;
 
 
-import kr.infonation.devspring.domain.member.Member;
-import kr.infonation.devspring.dto.member.CreateMember;
-import kr.infonation.devspring.dto.member.UpdateMember;
-import kr.infonation.devspring.repository.MemberRepository;
+import kr.infonation.domain.member.Member;
+import kr.infonation.dto.member.CreateMember;
+import kr.infonation.dto.member.UpdateMember;
+import kr.infonation.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

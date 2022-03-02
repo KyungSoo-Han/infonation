@@ -1,8 +1,8 @@
-package kr.infonation.devspring.dto.member;
+package kr.infonation.dto.member;
 
-import kr.infonation.devspring.domain.member.Address;
-import kr.infonation.devspring.domain.member.Member;
-import kr.infonation.devspring.domain.member.Role;
+import kr.infonation.domain.member.Address;
+import kr.infonation.domain.member.Member;
+import kr.infonation.domain.member.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-public class UpdateMember {
+public class CreateMember {
+
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
@@ -73,4 +74,5 @@ public class UpdateMember {
             this.modifiedDate = member.getModifiedDate();
         }
     }
+
 }

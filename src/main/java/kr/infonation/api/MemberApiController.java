@@ -1,9 +1,9 @@
-package kr.infonation.devspring.api;
+package kr.infonation.api;
 
-import kr.infonation.devspring.domain.member.Member;
-import kr.infonation.devspring.dto.member.CreateMember;
-import kr.infonation.devspring.dto.member.UpdateMember;
-import kr.infonation.devspring.service.MemberService;
+import kr.infonation.domain.member.Member;
+import kr.infonation.dto.member.CreateMember;
+import kr.infonation.dto.member.UpdateMember;
+import kr.infonation.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

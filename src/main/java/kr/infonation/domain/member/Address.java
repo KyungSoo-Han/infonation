@@ -1,4 +1,4 @@
-package kr.infonation.devspring.domain.member;
+package kr.infonation.domain.member;
 
 import lombok.Getter;
 
