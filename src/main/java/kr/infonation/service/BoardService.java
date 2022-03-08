@@ -6,6 +6,7 @@ import kr.infonation.dto.board.BoardDto;
 import kr.infonation.dto.board.CreateBoard;
 import kr.infonation.dto.board.DeleteBoard;
 import kr.infonation.dto.board.UpdateBoard;
+import kr.infonation.dto.member.MemberDto;
 import kr.infonation.repository.board.BoardRepository;
 import kr.infonation.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -55,5 +56,9 @@ public class BoardService {
         List<BoardDto> boardDtos = boardRepository.findBoard();
         return boardDtos;
     }
+    public List<BoardDto> findByTitleLike(String title){
+        return boardRepository.findByTitleLike("%" + title + "%");
+    }
+
 
 }

@@ -11,4 +11,8 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     @Query("select new kr.infonation.dto.board.BoardDto(b.board_id, b.title, b.content,m.name, m.member_id , b.viewCnt) from Board b join b.member m")
     List<BoardDto> findBoard();
+
+    @Query("select new kr.infonation.dto.board.BoardDto(b.board_id, b.title, b.content,m.name, m.member_id , b.viewCnt) from Board b join b.member m")
+    List<BoardDto> findByTitleLike(String title);
+
 }

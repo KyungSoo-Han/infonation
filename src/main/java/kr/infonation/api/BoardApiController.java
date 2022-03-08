@@ -68,6 +68,13 @@ public class BoardApiController {
         return new Result(boards.size(), boards);
     }
 
+    @ApiOperation(value = "게시판 제목으로 조회")
+    @GetMapping("/title/{title}")
+    public Result memberListNameLike(@PathVariable String title){
+        List<BoardDto> boards = boardService.findByTitleLike(title);
+
+        return new Result(boards.size(), boards);
+    }
 
     @Data
     @AllArgsConstructor
