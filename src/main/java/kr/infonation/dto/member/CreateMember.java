@@ -1,5 +1,6 @@
 package kr.infonation.dto.member;
 
+import io.swagger.annotations.ApiModel;
 import kr.infonation.domain.member.Address;
 import kr.infonation.domain.member.Member;
 import kr.infonation.domain.member.Role;
@@ -16,6 +17,7 @@ public class CreateMember {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
+    @ApiModel("CreateMember")
     public static class Request {
 
         private String name;
@@ -39,13 +41,13 @@ public class CreateMember {
                     .phoneNo(phoneNo)
                     .build();
         }
-
     }
 
 
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
+    @ApiModel("CreateMember")
     public static class Response {
 
         private Long member_id;

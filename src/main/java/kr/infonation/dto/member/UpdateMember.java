@@ -1,5 +1,6 @@
 package kr.infonation.dto.member;
 
+import io.swagger.annotations.ApiModel;
 import kr.infonation.domain.member.Address;
 import kr.infonation.domain.member.Member;
 import kr.infonation.domain.member.Role;
@@ -15,6 +16,7 @@ public class UpdateMember {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
+    @ApiModel("UpdateMember")
     public static class Request {
 
         private String name;
@@ -45,6 +47,7 @@ public class UpdateMember {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
+    @ApiModel("UpdateMember")
     public static class Response {
 
         private Long member_id;
