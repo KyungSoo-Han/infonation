@@ -18,5 +18,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("select new kr.infonation.dto.member.MemberDto(m.member_id, m.name, m.email) from Member m where m.member_id = :id")
     Optional<MemberDto> findByIds(@Param("id") Long id);
 
+        /*
+
+         */
 
 }
