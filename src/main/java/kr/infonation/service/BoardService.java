@@ -4,13 +4,11 @@ import kr.infonation.domain.board.Board;
 import kr.infonation.domain.member.Member;
 import kr.infonation.dto.board.BoardDto;
 import kr.infonation.dto.board.CreateBoard;
-import kr.infonation.dto.board.DeleteBoard;
 import kr.infonation.dto.board.UpdateBoard;
-import kr.infonation.dto.member.MemberDto;
+import kr.infonation.repository.board.BoardQueryRepository;
 import kr.infonation.repository.board.BoardRepository;
-import kr.infonation.repository.MemberRepository;
+import kr.infonation.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
+    private final BoardQueryRepository boardQueryRepository;
     private final MemberRepository memberRepository;
 
     @Transactional
@@ -58,6 +57,11 @@ public class BoardService {
     }
     public List<BoardDto> findByTitleLike(String title){
         return boardRepository.findByTitleLike("%" + title + "%");
+    }
+
+    public List<Board> findQueryDslBoardList(){
+
+        return boardQueryRepository.BoardList();
     }
 
 

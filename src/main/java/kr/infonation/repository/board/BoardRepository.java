@@ -1,6 +1,8 @@
 package kr.infonation.repository.board;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.infonation.domain.board.Board;
+import kr.infonation.domain.member.Member;
 import kr.infonation.dto.board.BoardDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

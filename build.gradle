@@ -1,3 +1,10 @@
+//querydsl 추가
+buildscript {
+	dependencies {
+		classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.10")
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.6.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
@@ -7,6 +14,8 @@ plugins {
 group = 'kr.infonation'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
 
 configurations {
 	compileOnly {
@@ -26,12 +35,44 @@ dependencies {
 	implementation "io.springfox:springfox-swagger-ui:3.0.0"
 	implementation "org.modelmapper:modelmapper:2.4.5"
 
+	//querydsl 추가
+	implementation 'com.querydsl:querydsl-jpa'
+	//querydsl 추가
+	implementation 'com.querydsl:querydsl-apt'
+
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+	//runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' // MariaDB
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+//querydsl 추가
+//def querydslDir = 'src/main/generated'
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+	library = "com.querydsl:querydsl-apt"
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src/main/java', querydslDir]
+		}
+	}
+}
+
+compileQuerydsl{
+	options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+	querydsl.extendsFrom compileClasspath
 }

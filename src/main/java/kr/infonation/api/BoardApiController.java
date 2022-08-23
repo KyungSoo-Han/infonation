@@ -3,15 +3,13 @@ package kr.infonation.api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import kr.infonation.domain.board.Board;
-import kr.infonation.domain.member.Member;
 import kr.infonation.dto.board.BoardDto;
 import kr.infonation.dto.board.CreateBoard;
 import kr.infonation.dto.board.DeleteBoard;
 import kr.infonation.dto.board.UpdateBoard;
 import kr.infonation.dto.member.MemberDto;
-import kr.infonation.repository.MemberRepository;
+import kr.infonation.repository.member.MemberRepository;
 import kr.infonation.service.BoardService;
-import kr.infonation.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -65,6 +62,13 @@ public class BoardApiController {
     @GetMapping
     public Result boardList(){
         List<BoardDto> boards = boardService.findBoardList();
+        return new Result(boards.size(), boards);
+    }
+
+    @ApiOperation(value = "게시판 쿼리DSL로 조회")
+    @GetMapping("/Qdsl")
+    public Result QueryDslBoardList(){
+        List<Board> boards = boardService.findQueryDslBoardList();
         return new Result(boards.size(), boards);
     }
 

@@ -5,7 +5,7 @@ import kr.infonation.domain.member.Member;
 import kr.infonation.dto.member.CreateMember;
 import kr.infonation.dto.member.MemberDto;
 import kr.infonation.dto.member.UpdateMember;
-import kr.infonation.repository.MemberRepository;
+import kr.infonation.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

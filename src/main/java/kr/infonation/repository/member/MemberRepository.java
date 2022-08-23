@@ -1,4 +1,4 @@
-package kr.infonation.repository;
+package kr.infonation.repository.member;
 
 import kr.infonation.domain.member.Member;
 import kr.infonation.dto.member.MemberDto;
