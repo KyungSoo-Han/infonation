@@ -1,59 +1,61 @@
-package kr.infonation.dto.member;
+package kr.infonation.dto.user;
 
 import io.swagger.annotations.ApiModel;
 import kr.infonation.domain.member.Address;
 import kr.infonation.domain.member.Member;
 import kr.infonation.domain.user.Role;
+import kr.infonation.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
-public class CreateMember {
+public class CreateUser {
 
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    @ApiModel("CreateMember")
+    @ApiModel("CreateUser")
     public static class Request {
-
-        private String loginId;
-        private String name;
+        private String login_id;
+        private String username;
         private String email;
         private String password;
         private String phoneNo;
         private String birthDate;
         private int age;
         private Address address;
+        private boolean activated;
         private Role role;
 
-        public Member toEntity(){
-            return Member.builder()
-                    .loginId(loginId)
-                    .name(name)
+        public User toEntity(PasswordEncoder passwordEncoder) {
+            return User.builder()
+                    .login_id(login_id)
+                    .username(username)
                     .email(email)
                     .role(role)
                     .age(age)
                     .address(address)
                     .birthDate(birthDate)
-                    .password(password)
+                    .password(passwordEncoder.encode(password))
                     .phoneNo(phoneNo)
+                    .activated(activated)
                     .build();
         }
     }
 
-
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    @ApiModel("CreateMember")
+    @ApiModel("CreateUser")
     public static class Response {
 
-        private Long member_id;
-        private String loginId;
+        private Long user_id;
+        private String login_id;
         private String name;
         private String email;
         private String password;
@@ -65,20 +67,19 @@ public class CreateMember {
         private LocalDateTime createdDate;
         private LocalDateTime modifiedDate;
 
-        public Response(Member member) {
-            this.member_id = member.getMember_id();
-            this.loginId = member.getLoginId();
-            this.name = member.getName();
-            this.email = member.getEmail();
-            this.password = member.getPassword();
-            this.phoneNo = member.getPhoneNo();
-            this.birthDate = member.getBirthDate();
-            this.age = member.getAge();
-            this.address = member.getAddress();
-            this.role = member.getRole();
-            this.createdDate = member.getCreatedDate();
-            this.modifiedDate = member.getModifiedDate();
+        public Response(User user) {
+            this.user_id = user.getUser_id();
+            this.login_id = user.getLogin_id();
+            this.name = user.getUsername();
+            this.email = user.getEmail();
+            this.password = user.getPassword();
+            this.phoneNo = user.getPhoneNo();
+            this.birthDate = user.getBirthDate();
+            this.age = user.getAge();
+            this.address = user.getAddress();
+            this.role = user.getRole();
+            this.createdDate = user.getCreatedDate();
+            this.modifiedDate = user.getModifiedDate();
         }
     }
-
 }

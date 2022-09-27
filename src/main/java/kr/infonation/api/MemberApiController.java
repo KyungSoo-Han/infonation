@@ -51,7 +51,8 @@ public class MemberApiController {
         List<Member> members = memberService.findMembers();
 
         List<MemberDto> collect = members.stream()
-                .map(m -> new MemberDto(m.getMember_id(), m.getName(), m.getEmail()))
+                .map(m -> new MemberDto(m.getMember_id(), m.getLoginId(), m.getName(), m.getEmail(), m.getPhoneNo(),
+                                        m.getBirthDate(), m.getAge(), m.getAddress(), m.getRole()))
                 .collect(Collectors.toList());
 
         return new Result(collect.size(), collect);
@@ -63,7 +64,8 @@ public class MemberApiController {
         Optional<Member> members = memberService.findById(id);
 
         List<MemberDto> collect = members.stream()
-                .map(m -> new MemberDto(m.getMember_id(), m.getName(), m.getEmail()))
+                .map(m -> new MemberDto(m.getMember_id(), m.getLoginId(), m.getName(), m.getEmail(), m.getPhoneNo(),
+                        m.getBirthDate(), m.getAge(), m.getAddress(), m.getRole()))
                 .collect(Collectors.toList());
 
         return new Result(collect.size(), collect);

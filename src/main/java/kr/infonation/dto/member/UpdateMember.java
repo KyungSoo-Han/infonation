@@ -3,7 +3,7 @@ package kr.infonation.dto.member;
 import io.swagger.annotations.ApiModel;
 import kr.infonation.domain.member.Address;
 import kr.infonation.domain.member.Member;
-import kr.infonation.domain.member.Role;
+import kr.infonation.domain.user.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

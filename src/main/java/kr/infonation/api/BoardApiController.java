@@ -7,8 +7,9 @@ import kr.infonation.dto.board.BoardDto;
 import kr.infonation.dto.board.CreateBoard;
 import kr.infonation.dto.board.DeleteBoard;
 import kr.infonation.dto.board.UpdateBoard;
-import kr.infonation.dto.member.MemberDto;
-import kr.infonation.repository.member.MemberRepository;
+import kr.infonation.dto.user.UserDto;
+import kr.infonation.repository.user.UserQueryRepository;
+import kr.infonation.repository.user.UserRepository;
 import kr.infonation.service.BoardService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,13 +19,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/board")
 public class BoardApiController {
 
     private final BoardService boardService;
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
+    private final UserQueryRepository userQueryRepository;
 
     @ApiOperation(value = "게시판 등록")
     @PostMapping(produces = "application/json; charset=UTF-8")
@@ -33,9 +36,9 @@ public class BoardApiController {
             @RequestBody CreateBoard.Request boardRequest) {
 
         Board board = boardService.createBoard(boardRequest);
-        Long member_id = boardRequest.getMember_id();
-        Optional<MemberDto> memberDto = memberRepository.findByIds(member_id);
-        return new CreateBoard.Response(board, memberDto.orElseThrow());
+        String login_id = boardRequest.getLogin_id();
+        UserDto userDto = userQueryRepository.findById(login_id);
+        return new CreateBoard.Response(board, userDto);
 
     }
 
@@ -44,9 +47,9 @@ public class BoardApiController {
     public UpdateBoard.Response updateBoard(@PathVariable Long id, @RequestBody UpdateBoard.Request request) {
 
         Board board = boardService.updateBoard(id, request);
-        Long member_id = request.getMember_id();
-        Optional<MemberDto> memberDto = memberRepository.findByIds(member_id);
-        return new UpdateBoard.Response(board,memberDto.orElseThrow());
+        String login_id = request.getLogin_id();
+        UserDto userDto = userQueryRepository.findById(login_id);
+        return new UpdateBoard.Response(board,userDto);
     }
 
     @ApiOperation(value = "게시판 삭제")
@@ -65,10 +68,10 @@ public class BoardApiController {
         return new Result(boards.size(), boards);
     }
 
-    @ApiOperation(value = "게시판 쿼리DSL로 조회")
+   @ApiOperation(value = "게시판 쿼리DSL로 조회")
     @GetMapping("/Qdsl")
     public Result QueryDslBoardList(){
-        List<Board> boards = boardService.findQueryDslBoardList();
+        List<BoardDto> boards = boardService.findQueryDslBoardList();
         return new Result(boards.size(), boards);
     }
 

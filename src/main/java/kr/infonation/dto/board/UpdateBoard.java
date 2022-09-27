@@ -5,7 +5,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import kr.infonation.domain.board.Board;
 import kr.infonation.domain.member.Member;
+import kr.infonation.domain.user.User;
 import kr.infonation.dto.member.MemberDto;
+import kr.infonation.dto.user.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,15 +31,15 @@ public class UpdateBoard {
         @ApiModelProperty(value = "내용")
         private String content;
         @ApiModelProperty(value = "회원 ID")
-        private Long member_id;
+        private String login_id;
         @ApiModelProperty(value = "조회수")
         private int viewCnt;
 
-        public Board toEntity(Optional<Member> member){
+        public Board toEntity(Optional<User> user){
             return Board.builder()
                     .title(title)
                     .content(content)
-                    .member(member.orElseThrow())
+                    .user(user.orElseThrow())
                     .viewCnt(viewCnt)
                     .build();
         }
@@ -56,15 +58,15 @@ public class UpdateBoard {
         @ApiModelProperty(value = "내용")
         private String content;
         @ApiModelProperty(value = "회원")
-        private MemberDto member;
+        private UserDto user;
         @ApiModelProperty(value = "조회수")
         private int viewCnt;
 
-        public Response(Board board, MemberDto memberDto) {
+        public Response(Board board, UserDto userDto) {
             this.board_id = board.getBoard_id();
             this.title = board.getTitle();
             this.content = board.getContent();
-            this.member = memberDto;
+            this.user = userDto;
             this.viewCnt = board.getViewCnt();
         }
     }
