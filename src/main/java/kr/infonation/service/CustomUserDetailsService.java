@@ -1,5 +1,6 @@
 package kr.infonation.service;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import kr.infonation.domain.user.User;
 import kr.infonation.repository.user.UserQueryRepository;
 import kr.infonation.repository.user.UserRepository;
@@ -17,24 +18,23 @@ import java.util.List;
 @Component("userDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
    private final UserRepository userRepository;
-   private final UserQueryRepository userQueryRepository;
 
-   public CustomUserDetailsService(UserRepository userRepository, UserQueryRepository userQueryRepository) {
+   public CustomUserDetailsService(UserRepository userRepository) {
       this.userRepository = userRepository;
-      this.userQueryRepository = userQueryRepository;
    }
 
    @Override
    @Transactional
    public UserDetails loadUserByUsername(final String login_id) {
-      return userQueryRepository.findById2(login_id)
+
+      return userRepository.findByIdOptional(login_id)
          .map(user -> createUser(login_id, user))
          .orElseThrow(() -> new UsernameNotFoundException(login_id + " -> 데이터베이스에서 찾을 수 없습니다."));
    }
 
-   private org.springframework.security.core.userdetails.User createUser(String loginId, User user) {
+   private org.springframework.security.core.userdetails.User createUser(String login_id, User user) {
       if (!user.isActivated()) {
-         throw new RuntimeException(loginId + " -> 활성화되어 있지 않습니다.");
+         throw new RuntimeException(login_id + " -> 활성화되어 있지 않습니다.");
       }
 
       List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();

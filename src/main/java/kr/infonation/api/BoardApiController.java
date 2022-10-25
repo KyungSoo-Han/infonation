@@ -27,7 +27,6 @@ public class BoardApiController {
 
     private final BoardService boardService;
     private final UserRepository userRepository;
-    private final UserQueryRepository userQueryRepository;
 
     @ApiOperation(value = "게시판 등록")
     @PostMapping(produces = "application/json; charset=UTF-8")
@@ -37,7 +36,7 @@ public class BoardApiController {
 
         Board board = boardService.createBoard(boardRequest);
         String login_id = boardRequest.getLogin_id();
-        UserDto userDto = userQueryRepository.findById(login_id);
+        UserDto userDto = userRepository.findById(login_id);
         return new CreateBoard.Response(board, userDto);
 
     }
@@ -48,7 +47,7 @@ public class BoardApiController {
 
         Board board = boardService.updateBoard(id, request);
         String login_id = request.getLogin_id();
-        UserDto userDto = userQueryRepository.findById(login_id);
+        UserDto userDto = userRepository.findById(login_id);
         return new UpdateBoard.Response(board,userDto);
     }
 

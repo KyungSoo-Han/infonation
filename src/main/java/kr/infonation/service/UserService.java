@@ -5,7 +5,6 @@ import kr.infonation.dto.user.UserDto;
 import kr.infonation.domain.user.User;
 import kr.infonation.exception.DuplicateMemberException;
 import kr.infonation.exception.NotFoundMemberException;
-import kr.infonation.repository.user.UserQueryRepository;
 import kr.infonation.repository.user.UserRepository;
 import kr.infonation.util.SecurityUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,18 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final UserQueryRepository userQueryRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, UserQueryRepository userQueryRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.userQueryRepository = userQueryRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
     public User create(CreateUser.Request request) {
-        if (userQueryRepository.findById2(request.getLogin_id()).orElse(null) != null) {
+        if (userRepository.findByIdOptional(request.getLogin_id()).orElse(null) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
 
@@ -36,7 +33,7 @@ public class UserService {
 
     @Transactional
     public UserDto signup(UserDto userDto) {
-        if (userQueryRepository.findById2(userDto.getLogin_id()).orElse(null) != null) {
+        if (userRepository.findByIdOptional(userDto.getLogin_id()).orElse(null) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
 
@@ -54,14 +51,15 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public UserDto getUserWithAuthorities(String login_id) {
-        return UserDto.from(userQueryRepository.findById2(login_id).orElse(null));
+        System.out.println("getUserWithAuthorities login_id = " + login_id);
+        return UserDto.from(userRepository.findByIdOptional(login_id).orElse(null));
     }
 
     @Transactional(readOnly = true)
     public UserDto getMyUserWithAuthorities() {
         return UserDto.from(
                 SecurityUtil.getCurrentUsername()
-                        .flatMap(userQueryRepository::findById2)
+                        .flatMap(userRepository::findByIdOptional)
                         .orElseThrow(() -> new NotFoundMemberException("Member not found"))
         );
     }
