@@ -43,6 +43,7 @@ public class BoardQueryRepository {
         List<BoardDto> boardDtoList = queryFactory
                 .select(Projections.fields(BoardDto.class))
                 .from(board)
+                .orderBy(board.board_id.desc())
                 .fetch();
 
         return boardDtoList;
