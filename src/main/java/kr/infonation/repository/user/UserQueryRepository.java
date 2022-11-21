@@ -30,7 +30,7 @@ public class UserQueryRepository {
 
     public UserDto findByIdDtoUser(String login_id) {
         UserDto userDto = queryFactory
-                .select(new QUserDto(user.login_id, user.username,user.password, user.nickname, user.role))
+                .select(new QUserDto(user.login_id, user.name,user.password, user.nickname, user.role))
                 .from(user)
                 .where(user.login_id.eq(login_id))
                 .fetchOne();

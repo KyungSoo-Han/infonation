@@ -1,5 +1,6 @@
 package kr.infonation.domain.board;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import kr.infonation.base.BaseEntity;
 import kr.infonation.domain.member.Member;
@@ -23,6 +24,7 @@ public class Board extends BaseEntity {
     private String title;
     private String content;
 
+    @JsonIgnore
     @ApiModelProperty(hidden = true)
     @ManyToOne(fetch = LAZY)
     private User user;

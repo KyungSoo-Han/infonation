@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface UserRepositoryCustom {
 
     UserDto findById(String login_id);
-    Optional<User> findByIdOptional(String login_id);
+    Optional<User> findByLoginIdOptional(String login_id);
+    Optional<User> findByIdOptional(Long id);
 }

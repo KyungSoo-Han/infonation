@@ -27,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
    @Transactional
    public UserDetails loadUserByUsername(final String login_id) {
 
-      return userRepository.findByIdOptional(login_id)
+      return userRepository.findByLoginIdOptional(login_id)
          .map(user -> createUser(login_id, user))
          .orElseThrow(() -> new UsernameNotFoundException(login_id + " -> 데이터베이스에서 찾을 수 없습니다."));
    }

@@ -21,7 +21,7 @@ public class BoardDto {
         this.board_id = board.getBoard_id();
         this.title = board.getTitle();
         this.content = board.getContent();
-        this.name = board.getUser().getUsername();
+        this.name = board.getUser().getName();
         this.login_id = board.getUser().getLogin_id();
         this.viewCnt = board.getViewCnt();
     }

@@ -23,7 +23,7 @@ public class UserService {
 
     @Transactional
     public User create(CreateUser.Request request) {
-        if (userRepository.findByIdOptional(request.getLogin_id()).orElse(null) != null) {
+        if (userRepository.findByLoginIdOptional(request.getLogin_id()).orElse(null) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
 
@@ -33,12 +33,12 @@ public class UserService {
 
     @Transactional
     public UserDto signup(UserDto userDto) {
-        if (userRepository.findByIdOptional(userDto.getLogin_id()).orElse(null) != null) {
+        if (userRepository.findByLoginIdOptional(userDto.getLogin_id()).orElse(null) != null) {
             throw new DuplicateMemberException("이미 가입되어 있는 유저입니다.");
         }
 
         User user = User.builder()
-                .username(userDto.getUsername())
+                .name(userDto.getName())
                 .login_id(userDto.getLogin_id())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .nickname(userDto.getNickname())
@@ -52,14 +52,14 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserDto getUserWithAuthorities(String login_id) {
         System.out.println("getUserWithAuthorities login_id = " + login_id);
-        return UserDto.from(userRepository.findByIdOptional(login_id).orElse(null));
+        return UserDto.from(userRepository.findByLoginIdOptional(login_id).orElse(null));
     }
 
     @Transactional(readOnly = true)
     public UserDto getMyUserWithAuthorities() {
         return UserDto.from(
                 SecurityUtil.getCurrentUsername()
-                        .flatMap(userRepository::findByIdOptional)
+                        .flatMap(userRepository::findByLoginIdOptional)
                         .orElseThrow(() -> new NotFoundMemberException("Member not found"))
         );
     }

@@ -1,5 +1,7 @@
 package kr.infonation.domain.menu;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import kr.infonation.base.BaseEntity;
 import kr.infonation.dto.menu.MenuDto;
 import lombok.Builder;
@@ -12,9 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
+
 @NoArgsConstructor
 @Getter
 @Entity
+@Schema(accessMode = READ_ONLY, hidden = true)
 public class Menu extends BaseEntity {
 
     @Id
@@ -29,7 +34,7 @@ public class Menu extends BaseEntity {
     private String page;
     private boolean leaf;
 
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Menu parent;

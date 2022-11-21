@@ -78,6 +78,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/api/hello").permitAll()
+                .antMatchers("/api/user").permitAll()
                 .antMatchers("/api/auth/authenticate").permitAll()
                 .antMatchers("/api/user/signup").permitAll()
                 //.antMatchers("/api/**").permitAll()

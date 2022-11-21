@@ -79,8 +79,6 @@ public class MemberApiController {
         return new Result(members.size(), members);
     }
 
-    public
-
     @Data
     @AllArgsConstructor
     static class Result<T> {

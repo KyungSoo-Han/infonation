@@ -22,7 +22,7 @@ public class CreateUser {
     @ApiModel("CreateUser")
     public static class Request {
         private String login_id;
-        private String username;
+        private String name;
         private String email;
         private String password;
         private String phoneNo;
@@ -35,7 +35,7 @@ public class CreateUser {
         public User toEntity(PasswordEncoder passwordEncoder) {
             return User.builder()
                     .login_id(login_id)
-                    .username(username)
+                    .name(name)
                     .email(email)
                     .role(role)
                     .age(age)
@@ -68,9 +68,9 @@ public class CreateUser {
         private LocalDateTime modifiedDate;
 
         public Response(User user) {
-            this.user_id = user.getUser_id();
+            this.user_id = user.getId();
             this.login_id = user.getLogin_id();
-            this.name = user.getUsername();
+            this.name = user.getName();
             this.email = user.getEmail();
             this.password = user.getPassword();
             this.phoneNo = user.getPhoneNo();

@@ -21,7 +21,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
     @Override
     public UserDto findById(String login_id) {
         UserDto userDto = queryFactory
-                .select(new QUserDto(user.login_id, user.username,user.password, user.nickname, user.role))
+                .select(new QUserDto(user.login_id, user.name,user.password, user.nickname, user.role))
                 .from(user)
                 .where(user.login_id.eq(login_id))
                 .fetchOne();
@@ -30,11 +30,20 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
     }
 
     @Override
-    public Optional<User> findByIdOptional(String login_id) {
+    public Optional<User> findByLoginIdOptional(String login_id) {
 
         return queryFactory
                 .selectFrom(user)
                 .where(user.login_id.eq(login_id))
+                .stream().findFirst();
+    }
+
+    @Override
+    public Optional<User> findByIdOptional(Long user_id) {
+
+        return queryFactory
+                .selectFrom(user)
+                .where(user.id.eq(user_id))
                 .stream().findFirst();
     }
 }

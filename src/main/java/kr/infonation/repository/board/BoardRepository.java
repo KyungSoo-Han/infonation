@@ -11,10 +11,10 @@ import java.util.List;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
-    @Query("select new kr.infonation.dto.board.BoardDto(b.board_id, b.title, b.content,m.username, m.login_id , b.viewCnt) from Board b join b.user m order by b.board_id desc ")
+    @Query("select new kr.infonation.dto.board.BoardDto(b.board_id, b.title, b.content,m.name, m.login_id , b.viewCnt) from Board b join b.user m order by b.board_id desc ")
     List<BoardDto> findBoard();
 
-    @Query("select new kr.infonation.dto.board.BoardDto(b.board_id, b.title, b.content,m.username, m.login_id , b.viewCnt) from Board b join b.user m")
+    @Query("select new kr.infonation.dto.board.BoardDto(b.board_id, b.title, b.content,m.name, m.login_id , b.viewCnt) from Board b join b.user m")
     List<BoardDto> findByTitleLike(String title);
 
 }

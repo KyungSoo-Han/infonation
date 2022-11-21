@@ -25,7 +25,7 @@ public class UserDto {
 
    @NotNull
    @Size(min = 3, max = 50)
-   private String username;
+   private String name;
 
    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
    @NotNull
@@ -39,9 +39,9 @@ public class UserDto {
    private Role role;
 
    @QueryProjection
-   public UserDto(String login_id, String username, String password, String nickname, Role role) {
+   public UserDto(String login_id, String name, String password, String nickname, Role role) {
       this.login_id = login_id;
-      this.username = username;
+      this.name = name;
       this.password = password;
       this.nickname = nickname;
       this.role = role;
@@ -52,7 +52,7 @@ public class UserDto {
 
       return UserDto.builder()
               .login_id(user.getLogin_id())
-              .username(user.getUsername())
+              .name(user.getName())
               .nickname(user.getNickname())
               .role(user.getRole())
               .build();

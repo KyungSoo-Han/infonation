@@ -27,7 +27,7 @@ public class BoardService {
     @Transactional
     public Board createBoard(CreateBoard.Request request) {
 
-        Optional<User> user = userRepository.findByIdOptional(request.getLogin_id());
+        Optional<User> user = userRepository.findByLoginIdOptional(request.getLogin_id());
         return boardRepository.save(request.toEntity(user));
     }
 
@@ -36,7 +36,7 @@ public class BoardService {
     public Board updateBoard(Long board_id, UpdateBoard.Request request) {
         Board board = boardRepository.findById(board_id)
                 .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
-        Optional<User> user = userRepository.findByIdOptional(request.getLogin_id());
+        Optional<User> user = userRepository.findByLoginIdOptional(request.getLogin_id());
         board.update(request.toEntity(user));
 
         return board;

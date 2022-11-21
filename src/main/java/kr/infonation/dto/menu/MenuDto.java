@@ -1,5 +1,6 @@
 package kr.infonation.dto.menu;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.querydsl.core.annotations.QueryProjection;
 import kr.infonation.domain.menu.Menu;
 import lombok.AllArgsConstructor;
@@ -30,6 +31,7 @@ public class MenuDto {
     private String page;
     private boolean leaf;
 
+    @JsonIgnore
     private Menu parent;
     private List<MenuDto> children ;
 
