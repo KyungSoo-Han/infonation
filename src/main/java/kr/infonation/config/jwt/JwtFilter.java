@@ -1,4 +1,4 @@
-package kr.infonation.jwt;
+package kr.infonation.config.jwt;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

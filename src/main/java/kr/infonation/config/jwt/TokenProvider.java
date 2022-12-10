@@ -1,4 +1,4 @@
-package kr.infonation.jwt;
+package kr.infonation.config.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;

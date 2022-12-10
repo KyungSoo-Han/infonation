@@ -1,4 +1,4 @@
-package kr.infonation.jwt;
+package kr.infonation.config.jwt;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

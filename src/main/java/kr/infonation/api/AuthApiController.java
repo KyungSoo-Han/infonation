@@ -2,8 +2,8 @@ package kr.infonation.api;
 
 import kr.infonation.dto.account.LoginDto;
 import kr.infonation.dto.account.TokenDto;
-import kr.infonation.jwt.JwtFilter;
-import kr.infonation.jwt.TokenProvider;
+import kr.infonation.config.jwt.JwtFilter;
+import kr.infonation.config.jwt.TokenProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

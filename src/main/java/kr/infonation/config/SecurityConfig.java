@@ -1,9 +1,9 @@
 package kr.infonation.config;
 
-import kr.infonation.jwt.JwtAccessDeniedHandler;
-import kr.infonation.jwt.JwtAuthenticationEntryPoint;
-import kr.infonation.jwt.JwtSecurityConfig;
-import kr.infonation.jwt.TokenProvider;
+import kr.infonation.config.jwt.JwtAccessDeniedHandler;
+import kr.infonation.config.jwt.JwtAuthenticationEntryPoint;
+import kr.infonation.config.jwt.JwtSecurityConfig;
+import kr.infonation.config.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
