@@ -16,7 +16,7 @@ public class BoardDto {
     private String name;
     private String login_id;
     private int viewCnt;
-    // ㅆㄸㄴㅆ
+
     public BoardDto(Board board) {
         this.board_id = board.getBoard_id();
         this.title = board.getTitle();
